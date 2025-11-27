@@ -18,7 +18,7 @@ struct Graph
     vector<Edge> edges;
     vector<vector<std::pair<int, int>>> adjacency;
 
-    explicit Graph(int vertices) : V(vertices), adjacency(vertices) {}
+    Graph(int vertices) : V(vertices), adjacency(vertices) {}
 
     void addEdge(int u, int v, int weight)
     {
@@ -87,12 +87,12 @@ void breadthFirstSearch(const Graph &graph, int start)
         int current = q.front();
         q.pop();
         std::cout << current << " ";
-        for (const auto &neighbor : graph.adjacency[current])
+        for (auto it : graph.adjacency[current])
         {
-            if (!visited[neighbor.first])
+            if (!visited[it.first])
             {
-                visited[neighbor.first] = true;
-                q.push(neighbor.first);
+                visited[it.first] = true;
+                q.push(it.first);
             }
         }
     }
@@ -103,11 +103,11 @@ void depthFirstSearchUtil(const Graph &graph, int vertex, std::vector<bool> &vis
 {
     visited[vertex] = true;
     std::cout << vertex << " ";
-    for (const auto &neighbor : graph.adjacency[vertex])
+    for (auto it : graph.adjacency[vertex])
     {
-        if (!visited[neighbor.first])
+        if (!visited[it.first])
         {
-            depthFirstSearchUtil(graph, neighbor.first, visited);
+            depthFirstSearchUtil(graph, it.first, visited);
         }
     }
 }
